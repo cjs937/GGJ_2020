@@ -16,7 +16,6 @@ public class SlottedObject : MonoBehaviour
     [HideInInspector]
     public Rigidbody rigidbody;
     PlayerInteractionScript player;
-    bool followPlayer = true;
 
 
     // Start is called before the first frame update
@@ -38,8 +37,7 @@ public class SlottedObject : MonoBehaviour
 
             if (Vector3.Distance(transform.position, followPos) > maxDistance)
             {
-                
-                followPlayer = false;
+                player.DropObject(false);
             }
         }
     }
