@@ -9,16 +9,14 @@ public class CharController : MonoBehaviour
 	float verticalMoveSpeed = 0f;
 	float horizontalMoveSpeed = 0f;
 	const int maxSpeed = 25;
-	const int minSpeed = 0;
+	const int minSpeed = -25;
+    const int stop = 0;
 
-	Vector3 forward, right, rotateDir, rightMovement, upMovement;
+	Vector3 rotateDir, rightMovement, upMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-		//forward = Camera.main.transform.forward;
-		//forward.y = 0;
-		//forward = Vector3.Normalize(forward);
     }
 
     // Update is called once per frame
@@ -33,50 +31,6 @@ public class CharController : MonoBehaviour
         calcMovement();
         applyMovement();
         applyRotation();
-		
-		//moveSpeed += Input.GetAxis("LS_Vertical");
-
-		//if (moveSpeed > maxSpeed)
-		//	moveSpeed = maxSpeed;
-
-		//else if (moveSpeed < minSpeed)
-		//	moveSpeed = minSpeed;
-
-		//Vector3 rightMovement = transform.right * moveSpeed * Time.deltaTime * Input.GetAxis("RS_Horizontal");
-
-		//Vector3 upMovement;
-
-		//if (Input.GetAxis("RS_Vertical") >= 0)
-
-		//	upMovement = transform.forward * (moveSpeed + (moveSpeed * Input.GetAxis("RS_Vertical"))) * Time.deltaTime;
-
-		////	Vector3 upMovement = transform.forward * (moveSpeed / 2) * Time.deltaTime;
-
-		//else if (Input.GetAxis("RS_Vertical") < 0)
-
-		//	upMovement = transform.forward * (moveSpeed + ((moveSpeed * Input.GetAxis("RS_Vertical")))/2) * Time.deltaTime;
-
-		//else
-
-		//	upMovement = transform.forward * moveSpeed * Time.deltaTime;
-
-		//Vector3 upMovement = transform.forward * moveSpeed * Time.deltaTime * Input.GetAxis("RS_Vertical");
-		////Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-
-		////transform.forward = heading;
-		//rb.MovePosition(transform.position + rightMovement + upMovement);
-
-		//rb.velocity += (rightMovement + upMovement); //* Time.deltaTime;
-		//rb.velocity += upMovement;
-
-		//transform.position += rightMovement;
-		//transform.position += upMovement;
-
-		//Vector3 rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("LS_Horizontal") * 5;
-
-		//transform.forward = rotateDir;
-
-        
 	}
 
     void setMoveSpeed()
@@ -88,25 +42,45 @@ public class CharController : MonoBehaviour
 
 		else if (verticalMoveSpeed < minSpeed)
 			verticalMoveSpeed = minSpeed;
-	}
+
+        if (Input.GetAxis("RS_Horizontal") != 0)
+        {
+            horizontalMoveSpeed += Input.GetAxis("RS_Horizontal");
+
+            if (horizontalMoveSpeed > maxSpeed)
+                horizontalMoveSpeed = maxSpeed;
+
+            else if (horizontalMoveSpeed < minSpeed)
+                horizontalMoveSpeed = minSpeed;
+        }
+
+        else
+        {
+            if (horizontalMoveSpeed > 0)
+
+                horizontalMoveSpeed -= 1;
+
+            else
+
+                horizontalMoveSpeed += 1;
+
+            if (Mathf.Abs(horizontalMoveSpeed) <= 1)
+
+                horizontalMoveSpeed = 0;
+        }
+    }
     
     void calcMovement()
 	{
-		rightMovement = transform.right * verticalMoveSpeed * Time.deltaTime * Input.GetAxis("RS_Horizontal");
+		rightMovement = transform.right * horizontalMoveSpeed * Time.deltaTime;
 
-		if (Input.GetAxis("RS_Vertical") >= 0)
+        if (verticalMoveSpeed > 0)
 
-			upMovement = transform.forward * (verticalMoveSpeed + (verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) * Time.deltaTime;
+            calcPositiveVerticalMoveSpeed();
 
-		//	Vector3 upMovement = transform.forward * (moveSpeed / 2) * Time.deltaTime;
+        else if (verticalMoveSpeed < 0)
 
-		else if (Input.GetAxis("RS_Vertical") < 0)
-
-			upMovement = transform.forward * (verticalMoveSpeed + ((verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) / 2) * Time.deltaTime;
-
-		else
-
-			upMovement = transform.forward * verticalMoveSpeed * Time.deltaTime;
+            calcNegativeVerticalMoveSpeed();
 	}
     
     void applyRotation ()
@@ -118,7 +92,6 @@ public class CharController : MonoBehaviour
         float xRotation = 22.5f * Input.GetAxis("RS_Vertical");
         
         playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, zRotation));
-        //playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, 0.0f));
     }
 
     void applyMovement ()
@@ -126,4 +99,35 @@ public class CharController : MonoBehaviour
 		transform.position += rightMovement;
 		transform.position += upMovement;
 	}
+
+    void calcPositiveVerticalMoveSpeed()
+    {
+        if (Input.GetAxis("RS_Vertical") >= 0)
+
+            upMovement = transform.forward * (verticalMoveSpeed + (verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) * Time.deltaTime;
+
+        else if (Input.GetAxis("RS_Vertical") < 0)
+
+            upMovement = transform.forward * (verticalMoveSpeed + ((verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) / 2) * Time.deltaTime;
+
+        else
+
+            upMovement = transform.forward * verticalMoveSpeed * Time.deltaTime;
+    }
+
+    void calcNegativeVerticalMoveSpeed()
+    {
+        if (Input.GetAxis("RS_Vertical") >= 0)
+
+            upMovement = transform.forward * (verticalMoveSpeed - ((verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) / 2) * Time.deltaTime;
+
+
+        else if (Input.GetAxis("RS_Vertical") < 0)
+
+            upMovement = transform.forward * (verticalMoveSpeed - (verticalMoveSpeed * Input.GetAxis("RS_Vertical"))) * Time.deltaTime;
+
+        else
+
+            upMovement = transform.forward * verticalMoveSpeed * Time.deltaTime;
+    }
 }
