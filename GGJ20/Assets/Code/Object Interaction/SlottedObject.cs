@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ObjectType
+{
+    TEST
+}
+
 public class SlottedObject : MonoBehaviour
 {
     public float lerpSpeed = 2.0f;
     public float maxDistance = 5f;
-    Rigidbody rigidbody;
+    public ObjectType objectType;
+    
+    [HideInInspector]
+    public Rigidbody rigidbody;
     PlayerInteractionScript player;
     bool followPlayer = true;
 
@@ -21,7 +29,7 @@ public class SlottedObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(followPlayer)
+        if(player.heldObj == this)
         {
             Vector3 followPos = player.followPos.position;
             followPos.y = transform.position.y;
@@ -29,7 +37,10 @@ public class SlottedObject : MonoBehaviour
             rigidbody.position = Vector3.Lerp(transform.position, followPos, Time.deltaTime * lerpSpeed);
 
             if (Vector3.Distance(transform.position, followPos) > maxDistance)
+            {
+                
                 followPlayer = false;
+            }
         }
     }
 }
