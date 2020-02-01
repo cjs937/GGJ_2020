@@ -114,14 +114,12 @@ public class CharController : MonoBehaviour
 		rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("LS_Horizontal") * 5;
 		transform.forward = rotateDir;
 
-	    float zRotation = -45f * Input.GetAxis("RS_Horizontal");
-        //float xRotation = 45f * Input.GetAxis("RS_Vertical");
-
-        //playerVisual.transform.rotation = Quaternion.Euler(0.0f, 0.0f, zRotation);
-        //playerVisual.transform.rotation =
-        playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0.0f, 0.0f, zRotation));
-		//transform.Rotate(xRotation, 0.0f, 0.0f, Space.Self);
-	}
+	    float zRotation = -22.5f * Input.GetAxis("RS_Horizontal");
+        float xRotation = 22.5f * Input.GetAxis("RS_Vertical");
+        
+        playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, zRotation));
+        //playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, 0.0f));
+    }
 
     void applyMovement ()
 	{
