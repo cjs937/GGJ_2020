@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpSpeed: 5
-  maxDistance: 30
+  maxDistance: 10
   objectType: 0
   rigidbody: {fileID: 0}
 --- !u!54 &416170292
