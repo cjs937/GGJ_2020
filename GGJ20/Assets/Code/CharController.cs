@@ -13,7 +13,8 @@ public class CharController : MonoBehaviour
     const int minSpeed = -25;
     const int stop = 0;
     const float slow = 0.5f;
-
+    public float raycastDistance = 1f;
+    public LayerMask raycastLayers;
     Vector3 rotateDir, rightMovement, forwardMovement, verticalMovement;
 
     // Start is called before the first frame update
@@ -62,9 +63,14 @@ public class CharController : MonoBehaviour
 
     void applyMovement()
     {
-        transform.position += rightMovement;
-        transform.position += forwardMovement;
-        transform.position += verticalMovement;
+        if (!Physics.Raycast(transform.position, rightMovement.normalized, raycastDistance, raycastLayers))
+            transform.position += rightMovement;
+
+        if (!Physics.Raycast(transform.position, forwardMovement.normalized, raycastDistance, raycastLayers))
+            transform.position += forwardMovement;
+
+        if (!Physics.Raycast(transform.position, verticalMovement.normalized, raycastDistance, raycastLayers))
+            transform.position += verticalMovement;
     }
 
     float setDirectionSpeed(float directionSpeed, string thumbstick)
