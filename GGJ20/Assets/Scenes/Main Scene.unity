@@ -726,6 +726,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5882745051537952542, guid: 23ad05424b67b438889629e472a6bb83,
+        type: 3}
+      propertyPath: followCam
+      value: 
+      objectReference: {fileID: 497616305}
     - target: {fileID: 7511002489112831363, guid: 23ad05424b67b438889629e472a6bb83,
         type: 3}
       propertyPath: m_BackGroundColor.r
@@ -831,6 +836,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!20 &497616305 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1824833647524566773, guid: e4d3acf5c239ce742b2efda296437275,
+    type: 3}
+  m_PrefabInstance: {fileID: 568182662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &527440277
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +946,11 @@ PrefabInstance:
     - target: {fileID: 1824833647524566770, guid: e4d3acf5c239ce742b2efda296437275,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824833647524566773, guid: e4d3acf5c239ce742b2efda296437275,
+        type: 3}
+      propertyPath: m_TargetDisplay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1824833647524566775, guid: e4d3acf5c239ce742b2efda296437275,
