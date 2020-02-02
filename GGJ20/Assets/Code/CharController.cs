@@ -9,8 +9,12 @@ public class CharController : MonoBehaviour
     float forwardMoveSpeed = 0f;
     float horizontalMoveSpeed = 0f;
     float verticalMoveSpeed = 0f;
-    const int maxSpeed = 25;
-    const int minSpeed = -25;
+    const int maxSpeed = 12;
+    const int minSpeed = -12;
+    const int maxTilt = 5;
+    const int minTilt = 0;
+    float xRotation = 0f;
+    float zRotation = 0f;
     const int stop = 0;
     const float slow = 0.5f;
     public float raycastDistance = 1f;
@@ -38,9 +42,9 @@ public class CharController : MonoBehaviour
 
     void setMoveSpeed()
     {
-        forwardMoveSpeed = setDirectionSpeed(forwardMoveSpeed, "RS_Vertical");
-        horizontalMoveSpeed = setDirectionSpeed(horizontalMoveSpeed, "RS_Horizontal");
-        verticalMoveSpeed = setDirectionSpeed(verticalMoveSpeed, "LS_Vertical");
+        forwardMoveSpeed = setDirectionSpeed(forwardMoveSpeed, "LS_Vertical");
+        horizontalMoveSpeed = setDirectionSpeed(horizontalMoveSpeed, "LS_Horizontal");
+        verticalMoveSpeed = setDirectionSpeed(verticalMoveSpeed, "RS_Vertical");
     }
 
     void calcMovement()
@@ -52,11 +56,31 @@ public class CharController : MonoBehaviour
 
     void applyRotation()
     {
-        rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("LS_Horizontal") * 5;
+        rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("RS_Horizontal") * 5;
         transform.forward = rotateDir;
 
-        float zRotation = -5f * Input.GetAxis("RS_Horizontal");
-        float xRotation = 5f * Input.GetAxis("RS_Vertical");
+        zRotation += -1 * (10f / 60f) * Input.GetAxis("LS_Horizontal");
+        xRotation += (10f / 60f) * Input.GetAxis("LS_Vertical");
+
+        if (xRotation > 10)
+            xRotation = 10;
+
+        if(xRotation < -10)
+            xRotation = -10;
+
+        if (zRotation > 10)
+            zRotation = 10;
+
+        if (zRotation < -10)
+            zRotation = -10;
+
+        if (Input.GetAxis("LS_Horizontal") == 0)
+
+            zRotation += ((10/60) * -1 * Mathf.Sign(zRotation));
+
+        if (Input.GetAxis("LS_Vertical") == 0)
+
+            xRotation += ((10/60) * -1 * Mathf.Sign(xRotation));
 
         playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, zRotation));
     }
