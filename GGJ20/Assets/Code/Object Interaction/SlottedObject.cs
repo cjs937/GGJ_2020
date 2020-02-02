@@ -11,7 +11,6 @@ public enum ObjectType
 public class SlottedObject : MonoBehaviour
 {
     public float lerpSpeed = 2.0f;
-    public float maxDistance = 5f;
     public ObjectType objectType;
     
     [HideInInspector]
@@ -34,11 +33,6 @@ public class SlottedObject : MonoBehaviour
             followPos.y = transform.position.y;
 
             rigidbody.position = Vector3.Lerp(transform.position, followPos, Time.deltaTime * lerpSpeed);
-
-            if (Vector3.Distance(transform.position, followPos) > maxDistance)
-            {
-                player.DropObject(false);
-            }
         }
     }
 }

@@ -9,6 +9,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
     [HideInInspector]
     public SlottedObject heldObj;
+    public float maxDistance = 5f;
 
     LineRenderer lineRenderer;
     GameManager gameManager;
@@ -82,7 +83,7 @@ public class PlayerInteractionScript : MonoBehaviour
                 if (objectSlot == null)
                     continue;
 
-                if (objectSlot.slotType == heldObj.objectType)
+                if (objectSlot.slotType == heldObj.objectType && !objectSlot.occupied)
                 {
                     heldObj.enabled = false;
 
@@ -108,9 +109,14 @@ public class PlayerInteractionScript : MonoBehaviour
         if (heldObj == null)
             return;
 
+        if (Vector3.Distance(heldObj.transform.position, followPos.position) > maxDistance)
+        {
+            DropObject(false);
+
+            return;
+        }
+
         lineRenderer.SetPosition(0, followPos.transform.position);
         lineRenderer.SetPosition(1, heldObj.transform.position);
-
-        //Vector3 midPoint = (followPos.transform.position + heldObj.transform.position) / 2;
     }
 }

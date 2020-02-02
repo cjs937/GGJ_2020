@@ -11,6 +11,7 @@ public class ObjectSlot : MonoBehaviour
     float currentLerpTime;
     public float lerpTime;
     public ObjectType slotType;
+    public bool occupied = false;
 
     // Update is called once per frame
     void Update()
@@ -34,5 +35,7 @@ public class ObjectSlot : MonoBehaviour
         slottedObject.transform.rotation = transform.rotation;
         slottedObject.GetComponent<Collider>().enabled = false;
         slottedObject.rigidbody.isKinematic = true;
+
+        occupied = true;
     }
 }
