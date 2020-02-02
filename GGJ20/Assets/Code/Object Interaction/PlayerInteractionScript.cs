@@ -11,6 +11,9 @@ public class PlayerInteractionScript : MonoBehaviour
     public SlottedObject heldObj;
     public float maxDistance = 5f;
 
+    public Material goodMaterial;
+    public Material badMaterial;
+
     LineRenderer lineRenderer;
     GameManager gameManager;
 
@@ -19,10 +22,8 @@ public class PlayerInteractionScript : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         gameManager = FindObjectOfType<GameManager>();
-
-        //lineRenderer.positionCount = 4;
-
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -109,7 +110,8 @@ public class PlayerInteractionScript : MonoBehaviour
         if (heldObj == null)
             return;
 
-        if (Vector3.Distance(heldObj.transform.position, followPos.position) > maxDistance)
+        float distance = Vector3.Distance(heldObj.transform.position, followPos.position);
+        if (distance > maxDistance)
         {
             DropObject(false);
 
@@ -118,5 +120,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
         lineRenderer.SetPosition(0, followPos.transform.position);
         lineRenderer.SetPosition(1, heldObj.transform.position);
+
+        lineRenderer.material.Lerp(goodMaterial, badMaterial, distance / maxDistance);
     }
 }

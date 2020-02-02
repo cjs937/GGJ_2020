@@ -25,10 +25,16 @@ public class CharController : MonoBehaviour
     public float raycastDistance = 1f;
     public LayerMask raycastLayers;
     Vector3 rotateDir, rightMovement, forwardMovement, verticalMovement;
-
+    string verticalAxis;
     // Start is called before the first frame update
     void Start()
     {
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            verticalAxis = "RS_Vertical_PC";
+        else
+            verticalAxis = "RS_Vertical";
+
+        Debug.Log(verticalAxis);
     }
 
     // Update is called once per frame
@@ -49,7 +55,7 @@ public class CharController : MonoBehaviour
     {
         forwardMoveSpeed = setDirectionSpeed(forwardMoveSpeed, "LS_Vertical");
         horizontalMoveSpeed = setDirectionSpeed(horizontalMoveSpeed, "LS_Horizontal");
-        verticalMoveSpeed = setVerticalDirectionSpeed(verticalMoveSpeed, "RS_Vertical");
+        verticalMoveSpeed = setVerticalDirectionSpeed(verticalMoveSpeed, verticalAxis);
     }
 
     void calcMovement()
@@ -207,8 +213,6 @@ public class CharController : MonoBehaviour
 
         if (Mathf.Abs(directionSpeed) < 2)
             directionSpeed = 0;
-
-        Debug.Log(directionSpeed);
 
         return directionSpeed;
     }
