@@ -18,7 +18,6 @@ public class SlottedObject : MonoBehaviour
     public Rigidbody rigidbody;
     PlayerInteractionScript player;
 
-
     // Start is called before the first frame update
     void Start()
     {

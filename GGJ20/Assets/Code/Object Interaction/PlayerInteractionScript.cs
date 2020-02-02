@@ -11,11 +11,13 @@ public class PlayerInteractionScript : MonoBehaviour
     public SlottedObject heldObj;
 
     LineRenderer lineRenderer;
+    GameManager gameManager;
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
+        gameManager = FindObjectOfType<GameManager>();
 
         //lineRenderer.positionCount = 4;
 
@@ -67,6 +69,8 @@ public class PlayerInteractionScript : MonoBehaviour
         if (!heldObj)
             return;
 
+        bool didScore = false;
+
         if (manualDrop)
         {
             Collider[] objectsInRange = Physics.OverlapSphere(transform.position, objectFindRadius);
@@ -83,11 +87,18 @@ public class PlayerInteractionScript : MonoBehaviour
                     heldObj.enabled = false;
 
                     objectSlot.ReturnToSlot(heldObj);
+
+                    didScore = true;
                 }
             }
         }
 
         heldObj = null;
+        if(didScore)
+        {
+            gameManager.AddToScore();
+
+        }
     }
 
     void UpdateTractorBeam()
