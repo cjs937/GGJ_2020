@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum ObjectType
 {
-    TEST
+    BATTERY,
+    CAPACITOR
 }
 
 public class SlottedObject : MonoBehaviour
