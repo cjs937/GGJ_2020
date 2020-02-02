@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRotate: 1
   rotateSpeed: 7
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &1258767553311675867
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRotate: 1
   rotateSpeed: 6
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!114 &6779931807205685661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,6 +690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRotate: 1
   rotateSpeed: 6
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &3785782402735518287
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +809,7 @@ MonoBehaviour:
   followPos: {fileID: 7770646975844641850}
   objectFindRadius: 8
   heldObj: {fileID: 0}
+  maxDistance: 13
 --- !u!120 &1213227092002775846
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1350,6 +1354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRotate: 1
   rotateSpeed: 6
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!114 &6178109617457164490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1364,6 +1369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldRotate: 1
   rotateSpeed: 6
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &8081396420473368253
 GameObject:
   m_ObjectHideFlags: 0

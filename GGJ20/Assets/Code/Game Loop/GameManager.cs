@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public int piecesCollected;
     public float time;
 
+    public Camera eyeCam;
+    public Camera followCam;
+
     private void Start()
     {
         UI = FindObjectOfType<GameUI>();

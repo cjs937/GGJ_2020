@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 8902202693486112167}
   - component: {fileID: 4969905242336076066}
   - component: {fileID: 8772009547902815037}
+  - component: {fileID: 2369499183238035722}
   m_Layer: 0
   m_Name: SmallFan_Horizontal
   m_TagString: Untagged
@@ -237,6 +238,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2369499183238035722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683645158978140111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5607e024f75df42bf743b19a36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldRotate: 1
+  rotateSpeed: 8
+  rotateAxis: {x: 0, y: 1, z: 0}
 --- !u!1 &723566559960661615
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +422,7 @@ GameObject:
   - component: {fileID: 1076389637083605525}
   - component: {fileID: 8469608026832063240}
   - component: {fileID: 3747753778398283736}
+  - component: {fileID: 2806527778432134835}
   m_Layer: 0
   m_Name: LargeFan_01
   m_TagString: Untagged
@@ -474,6 +491,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2806527778432134835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160850075536012391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5607e024f75df42bf743b19a36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldRotate: 1
+  rotateSpeed: 0.8
+  rotateAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &1954320660469356444
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +930,7 @@ GameObject:
   - component: {fileID: 3861741093319289945}
   - component: {fileID: 1885177726232054464}
   - component: {fileID: 6249415334871756416}
+  - component: {fileID: 914901953051537975}
   m_Layer: 0
   m_Name: LargeFan_02
   m_TagString: Untagged
@@ -966,6 +999,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &914901953051537975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287214153363162284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5607e024f75df42bf743b19a36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldRotate: 1
+  rotateSpeed: 0.8
+  rotateAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &5444493876368904899
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1025,7 @@ GameObject:
   - component: {fileID: 2597264181950277297}
   - component: {fileID: 4564827846362380932}
   - component: {fileID: 7475531411195380877}
+  - component: {fileID: 6692174522778185426}
   m_Layer: 0
   m_Name: SmallFan_Vertical
   m_TagString: Untagged
@@ -1045,6 +1094,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &6692174522778185426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5444493876368904899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5607e024f75df42bf743b19a36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldRotate: 1
+  rotateSpeed: 5
+  rotateAxis: {x: 1, y: 0, z: 0}
 --- !u!1 &6294268563879250226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1199,7 @@ GameObject:
   - component: {fileID: 2946620557271956759}
   - component: {fileID: 9197716776726822518}
   - component: {fileID: 5303812362346842862}
+  - component: {fileID: 3126026517046493287}
   m_Layer: 0
   m_Name: LargeFan_03
   m_TagString: Untagged
@@ -1203,6 +1268,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &3126026517046493287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300889127339442596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5607e024f75df42bf743b19a36a4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldRotate: 1
+  rotateSpeed: 0.8
+  rotateAxis: {x: 0, y: 0, z: 1}
 --- !u!1 &6367347965424575499
 GameObject:
   m_ObjectHideFlags: 0
