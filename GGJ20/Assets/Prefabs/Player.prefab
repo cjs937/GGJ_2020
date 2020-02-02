@@ -923,6 +923,8 @@ MonoBehaviour:
   maxPieces: 0
   piecesCollected: 0
   time: 0
+  eyeCam: {fileID: 7511002489112831363}
+  followCam: {fileID: 0}
 --- !u!1 &4560086648127613419
 GameObject:
   m_ObjectHideFlags: 0

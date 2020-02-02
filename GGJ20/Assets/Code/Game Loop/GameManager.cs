@@ -16,11 +16,14 @@ public class GameManager : MonoBehaviour
 
     public Camera eyeCam;
     public Camera followCam;
+    Camera mainCamera;
 
     private void Start()
     {
         UI = FindObjectOfType<GameUI>();
         player = GetComponent<CharController>();
+
+        mainCamera = eyeCam;
         BeginGame();
     }
 
@@ -37,6 +40,9 @@ public class GameManager : MonoBehaviour
                 EndGame(false);
             }
         }
+
+        if (Input.GetButtonDown("CameraSwitch"))
+            SwapCameras();
     }
 
     public void BeginGame()
@@ -74,5 +80,29 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void SwapCameras()
+    {
+        Camera otherCamera;
+
+        if (mainCamera == eyeCam)
+        {
+            mainCamera = followCam;
+            otherCamera = eyeCam;
+        }
+        else
+        {
+            mainCamera = eyeCam;
+            otherCamera = followCam;
+        }
+
+
+        otherCamera.tag = "Untagged";
+        otherCamera.targetTexture = mainCamera.targetTexture;
+
+        mainCamera.tag = "MainCamera";
+        mainCamera.targetTexture = null;
+        
     }
 }
