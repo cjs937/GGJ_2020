@@ -9,6 +9,11 @@ public class CharController : MonoBehaviour
     float forwardMoveSpeed = 0f;
     float horizontalMoveSpeed = 0f;
     float verticalMoveSpeed = 0f;
+    float rightTurnSpeed = 0f;
+    float leftTurnSpeed = 0f;
+    float turnSpeed = 0f;
+    int turnSign = 0;
+    float resetTurnSpeed = 0f;
     const int maxSpeed = 12;
     const int minSpeed = -12;
     const int maxTilt = 5;
@@ -44,7 +49,7 @@ public class CharController : MonoBehaviour
     {
         forwardMoveSpeed = setDirectionSpeed(forwardMoveSpeed, "LS_Vertical");
         horizontalMoveSpeed = setDirectionSpeed(horizontalMoveSpeed, "LS_Horizontal");
-        verticalMoveSpeed = setDirectionSpeed(verticalMoveSpeed, "RS_Vertical");
+        verticalMoveSpeed = setVerticalDirectionSpeed(verticalMoveSpeed, "RS_Vertical");
     }
 
     void calcMovement()
@@ -56,11 +61,72 @@ public class CharController : MonoBehaviour
 
     void applyRotation()
     {
-        rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("RS_Horizontal") * 5;
+        if (Input.GetAxis("RS_Horizontal") > 0)
+        {
+            turnSign = 1;
+
+            rightTurnSpeed += 0.5f * Input.GetAxis("RS_Horizontal");
+
+            if (rightTurnSpeed > 5)
+
+                rightTurnSpeed = 5;
+
+            turnSpeed = rightTurnSpeed;
+            leftTurnSpeed = resetTurnSpeed;
+        }
+
+        else if (Input.GetAxis("RS_Horizontal") < 0)
+
+        {
+            turnSign = -1;
+
+            leftTurnSpeed += -1 * 0.5f * Input.GetAxis("RS_Horizontal");
+
+            if (leftTurnSpeed > 5)
+
+                leftTurnSpeed = 5;
+
+            turnSpeed = leftTurnSpeed;
+            rightTurnSpeed = resetTurnSpeed;
+        }
+
+        else
+        {           
+            rightTurnSpeed -= 0.5f;
+            leftTurnSpeed -= 0.5f;
+            turnSpeed -= 0.5f;
+
+            if (rightTurnSpeed < 0)
+
+                rightTurnSpeed = 0;
+
+            if (leftTurnSpeed < 0)
+
+                leftTurnSpeed = 0;
+
+            if (turnSpeed < 0)
+
+                turnSpeed = 0;
+
+           // Debug.Log(turnSpeed);
+        }
+
+        if (Input.GetAxis("RS_Horizontal") != 0)
+            rotateDir = transform.forward + transform.right * Time.deltaTime * Input.GetAxis("RS_Horizontal") * turnSpeed;
+        else
+        {
+            //Debug.Log(turnSign);
+            if (turnSign > 0)
+                rotateDir = transform.forward + transform.right * Time.deltaTime * Mathf.Abs(turnSign) * turnSpeed;
+            else
+                rotateDir = transform.forward + transform.right * Time.deltaTime * -1 * Mathf.Abs(turnSign) * turnSpeed;
+
+        }
+
         transform.forward = rotateDir;
 
-        zRotation += -1 * (10f / 60f) * Input.GetAxis("LS_Horizontal");
-        xRotation += (10f / 60f) * Input.GetAxis("LS_Vertical");
+        zRotation += -1 * Input.GetAxis("LS_Horizontal");
+        xRotation += Input.GetAxis("LS_Vertical");
 
         if (xRotation > 10)
             xRotation = 10;
@@ -76,11 +142,19 @@ public class CharController : MonoBehaviour
 
         if (Input.GetAxis("LS_Horizontal") == 0)
 
-            zRotation += ((10/60) * -1 * Mathf.Sign(zRotation));
+            zRotation += (-1.0f  * Mathf.Sign(zRotation));
 
         if (Input.GetAxis("LS_Vertical") == 0)
 
-            xRotation += ((10/60) * -1 * Mathf.Sign(xRotation));
+            xRotation += (-1.0f * Mathf.Sign(xRotation));
+
+        if ((Mathf.Abs(zRotation) < 1.1) && (Input.GetAxis("LS_Horizontal") == 0))
+
+            zRotation = 0;
+
+        if ((Mathf.Abs(xRotation) < 1.1) && (Input.GetAxis("LS_Vertical") == 0))
+
+            xRotation = 0;
 
         playerVisual.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(xRotation, 0.0f, zRotation));
     }
@@ -110,6 +184,31 @@ public class CharController : MonoBehaviour
         if (Input.GetAxis(thumbstick) == 0)
 
             directionSpeed += (slow * -1 * Mathf.Sign(directionSpeed));
+
+        if (Mathf.Abs(directionSpeed) < 1)
+            directionSpeed = 0;
+
+        return directionSpeed;
+    }
+
+    float setVerticalDirectionSpeed (float directionSpeed, string thumbstick)
+    {
+        directionSpeed += 2 * Input.GetAxis(thumbstick);
+
+        if (directionSpeed > 25)
+            directionSpeed = 25;
+
+        else if (directionSpeed < -25)
+            directionSpeed = -25;
+
+        if (Input.GetAxis(thumbstick) == 0)
+
+            directionSpeed += (2 * slow * -1 * Mathf.Sign(directionSpeed));
+
+        if (Mathf.Abs(directionSpeed) < 2)
+            directionSpeed = 0;
+
+        Debug.Log(directionSpeed);
 
         return directionSpeed;
     }
