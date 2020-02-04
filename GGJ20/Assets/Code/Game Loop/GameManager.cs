@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if(inGame)
         {
+            //De-incriment game timer
             time -= Time.deltaTime;
             time = Mathf.Max(0, time);
             
@@ -43,6 +44,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetButtonDown("CameraSwitch"))
             SwapCameras();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Quit();
     }
 
     public void BeginGame()
@@ -99,8 +103,10 @@ public class GameManager : MonoBehaviour
 
 
         otherCamera.tag = "Untagged";
+        //Setting this camera to render to the texture
         otherCamera.targetTexture = mainCamera.targetTexture;
 
+        //Changing to main camera tag just in case
         mainCamera.tag = "MainCamera";
         mainCamera.targetTexture = null;
         

@@ -18,6 +18,7 @@ public class ObjectSlot : MonoBehaviour
     {
         if(lerping)
         {
+            //Lerps the object to smoothly animate it into place
             currentLerpTime += Time.deltaTime;
 
             slottedObj.transform.position = Vector3.Lerp(lerpStart.position, lerpEnd.position, currentLerpTime / lerpTime);
@@ -27,6 +28,7 @@ public class ObjectSlot : MonoBehaviour
         }
     }
 
+    //Begins lerping (linear interpolating) the slotted object
     public void ReturnToSlot(SlottedObject slottedObject)
     {
         slottedObj = slottedObject;

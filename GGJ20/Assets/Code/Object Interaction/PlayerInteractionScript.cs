@@ -20,6 +20,7 @@ public class PlayerInteractionScript : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        //Hides the line until its needed
         lineRenderer.enabled = false;
         gameManager = FindObjectOfType<GameManager>();
     }
@@ -40,12 +41,15 @@ public class PlayerInteractionScript : MonoBehaviour
 
     public void PickUpObject()
     {
+        //Finds all colliders in a certain radius
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, objectFindRadius);
         float distanceToClosest = float.MaxValue;
         SlottedObject closestObject = null;
 
+        //Loops through to find the closest slotted object to the player
         foreach (Collider nearbyObj in objectsInRange)
         {
+            //Casts to a slotted object to check if this collider is valid for distance checking
             SlottedObject slottedObj = nearbyObj.GetComponent<SlottedObject>();
 
             if (slottedObj == null || !slottedObj.enabled)
@@ -53,6 +57,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
             float distance = Vector3.Distance(followPos.transform.position, slottedObj.transform.position);
             
+            //If this slotted obj is closer than the last one in the loop then the logic is updated accordingly
             if (distance < distanceToClosest)
             {
                 closestObject = slottedObj;
@@ -84,6 +89,7 @@ public class PlayerInteractionScript : MonoBehaviour
                 if (objectSlot == null)
                     continue;
 
+                //If the held item slot type is the same as this slot, and it has not been used yet, then put the held item into the slot
                 if (objectSlot.slotType == heldObj.objectType && !objectSlot.occupied)
                 {
                     heldObj.enabled = false;
@@ -103,6 +109,7 @@ public class PlayerInteractionScript : MonoBehaviour
         }
     }
 
+    //Updates the line renderer for the tractor beam and moves the object to match the player's position
     void UpdateTractorBeam()
     {
         lineRenderer.enabled = !(heldObj == null);
@@ -118,9 +125,11 @@ public class PlayerInteractionScript : MonoBehaviour
             return;
         }
 
+        //Set the two ends of the line to follow the player and the held object
         lineRenderer.SetPosition(0, followPos.transform.position);
         lineRenderer.SetPosition(1, heldObj.transform.position);
 
+        //Lerp the color of the line based on distance
         lineRenderer.material.Lerp(goodMaterial, badMaterial, distance / maxDistance);
     }
 }

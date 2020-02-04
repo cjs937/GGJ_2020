@@ -29,9 +29,11 @@ public class SlottedObject : MonoBehaviour
     {
         if(player.heldObj == this)
         {
+            //Lerp object towards player if it is currently being held by them
             Vector3 followPos = player.followPos.position;
             followPos.y = transform.position.y;
 
+            //Rigidbody position is used so that collisions will still work on these objects
             rigidbody.position = Vector3.Lerp(transform.position, followPos, Time.deltaTime * lerpSpeed);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class was used to test things before the movement code was finished and can be ignored :P //
 public class TempPlayerMovement : MonoBehaviour
 {
     float movespeed = 4f;

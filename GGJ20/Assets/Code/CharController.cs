@@ -167,6 +167,8 @@ public class CharController : MonoBehaviour
 
     void applyMovement()
     {
+        //These raycasts are checking the directions of the players movement to make sure that there are no collisions in the way
+        //The layermask dictates which layers will trigger a collision and an objects layers can be set in the unity editor
         if (!Physics.Raycast(transform.position, rightMovement.normalized, raycastDistance, raycastLayers))
             transform.position += rightMovement;
 

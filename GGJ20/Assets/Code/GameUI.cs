@@ -31,6 +31,7 @@ public class GameUI : MonoBehaviour
         pointsText.text = gameManager.piecesCollected.ToString() + " / " + gameManager.maxPieces.ToString();
     }
 
+    //Brings up the game over screen and shows the right message depending on the win state
     public void GameOver(bool win)
     {
         gameOverScreen.SetActive(true);

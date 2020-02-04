@@ -14,6 +14,8 @@ public class FollowPlayerCam : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerInteractionScript>();
+
+        //Creates a new object for the camera mask on its own
         cameraMask = new GameObject("CameraMask").transform;
     }
 
@@ -22,10 +24,12 @@ public class FollowPlayerCam : MonoBehaviour
     {
         if(player)
         {
+            //Camera mask is set to the actual desired camera position & rotation
             cameraMask.position = player.followPos.position;
             cameraMask.position += followOffset;
             cameraMask.LookAt(player.followPos);
 
+            //Camera interpolates to smoothly match the camera mask
             transform.position = Vector3.Lerp(transform.position, cameraMask.position, smoothingSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, cameraMask.rotation, smoothingSpeed * Time.deltaTime);
         }

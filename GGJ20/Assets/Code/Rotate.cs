@@ -8,7 +8,6 @@ public class Rotate : MonoBehaviour
     public float rotateSpeed;
     public Vector3 rotateAxis;
 
-
     private void Start()
     {
 
